@@ -1,32 +1,38 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 export const authSlice = createSlice({
-  name: 'Journal',
+  name: 'auth',
   initialState: {
-    status: 'no-authentication',
-    uid: null,
-    email: null,
-    displaName: null,
-    photoURL: null,
-    errorMenssage: null,
+    status: 'not-authenticated',
+   user : {},
+    errorMenssage: undefined,
         }, 
   reducers: {
 
-   login: (state, action) => {
-
+    onlogin: (state, {payload}) => {
+      state.status = "authenticated";
+      state.user = payload;
+      state.errorMenssage = undefined;
    },
-   logout: (state, payload) => {
-
+   onLogut: (state, {payload}) => {
+    state.status = "not-authenticated";
+    state.user = {};
+    state.errorMenssage = payload;
    },
    checkingCredentials: (state) => {
        state.status = "checking";
-   }
-      
-    }
+       state.user = {};
+       state.errorMenssage = undefined;
+   },
+   clearErrorMessage: (state) => {
+        state.errorMenssage = undefined;
+   }   
+  }
 });
 
 export const {
-  login,
-  logout,
-  checkingCredentials
+  onlogin,
+  onLogut,
+  clearErrorMessage,
+  checkingCredentials,
 } = authSlice.actions;
