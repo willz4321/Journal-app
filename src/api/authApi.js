@@ -2,7 +2,7 @@
 import axios from "axios";
 
 const authApi = axios.create({
-    baseURL: "http://localhost:8080/auth/"
+    baseURL: "https://journal-app-backend-production.up.railway.app/auth/"
 })
 
 authApi.interceptors.request.use( config => {
